@@ -76,6 +76,5 @@ class Television:
     def __str__(self):
         """
         Return the string representation of the television's status: Power, Channel and Volume
-        :return:
         """
         return f"Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume if not self.__muted else 0}"
