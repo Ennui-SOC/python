@@ -4,34 +4,47 @@ class Television:
     MIN_CHANNEL = 0
     MAX_CHANNEL = 3
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
-        Television object initialized with default values. Volume and Channel are set to their minimum values
-        while status and muted are set to False
+        Initializes a Television object with default values.
+        Status and muted are set to False; volume and channel are set to their minimum values.
+
+        Returns:
+            None
         """
         self.__status = False
         self.__muted = False
         self.__volume = Television.MIN_VOLUME
         self.__channel = Television.MIN_CHANNEL
 
-    def power(self):
+    def power(self) -> None:
         """
-        Toggles the power status of the television to off or on
+        Toggles the power status of the television between on and off.
+
+        Returns:
+            None
         """
         self.__status = not self.__status
 
-    def mute(self):
+    def mute(self) -> None:
         """
-        Toggle the mute status of the television when on, this has no effect when the television is off
+        Toggles the mute status of the television when it is on.
+        Has no effect when the television is off.
+
+        Returns:
+            None
         """
         if self.__status:
             self.__muted = not self.__muted
 
-    def channel_up(self):
+    def channel_up(self) -> None:
         """
-        When the television is on, the channel is increased by one.
-        If the channel is already at the maximum, it cycles back to the minimum channel
-        doesn't apply when television is off
+        Increases the channel by one when the television is on.
+        If the channel is at the maximum, it cycles back to the minimum channel.
+        Has no effect when the television is off.
+
+        Returns:
+            None
         """
         if self.__status:
             if self.__channel == Television.MAX_CHANNEL:
@@ -39,11 +52,14 @@ class Television:
             else:
                 self.__channel += 1
 
-    def channel_down(self):
+    def channel_down(self) -> None:
         """
-        When the television is off, the channel is decreased by one.
-        If the channel is already at the minimum, it cycles back to the maximum channel
-        doesn't apply when television is off
+        Decreases the channel by one when the television is on.
+        If the channel is at the minimum, it cycles back to the maximum channel.
+        Has no effect when the television is off.
+
+        Returns:
+            None
         """
         if self.__status:
             if self.__channel == Television.MIN_CHANNEL:
@@ -51,30 +67,42 @@ class Television:
             else:
                 self.__channel -= 1
 
-    def volume_up(self):
+    def volume_up(self) -> None:
         """
-        Increase the volume by one when the television is on and if television is muted, it will unmute and adjust
-        Volume will not exceed the maximum volume
-        doesn't apply when television is off
+        Increases the volume by one when the television is on.
+        If the television is muted, it will unmute before adjusting.
+        Volume will not exceed the maximum value.
+        Has no effect when the television is off.
+
+        Returns:
+            None
         """
         if self.__status:
             self.__muted = False
             if self.__volume < Television.MAX_VOLUME:
                 self.__volume += 1
 
-    def volume_down(self):
+    def volume_down(self) -> None:
         """
-        Decrease the volume by one when the television is on and if television is muted, it will unmute and adjust
-        volume will not exceed the minimum volume
-        doesn't apply when television is off
+        Decreases the volume by one when the television is on.
+        If the television is muted, it will unmute before adjusting.
+        Volume will not go below the minimum value.
+        Has no effect when the television is off.
+
+        Returns:
+            None
         """
         if self.__status:
             self.__muted = False
             if self.__volume > Television.MIN_VOLUME:
                 self.__volume -= 1
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
-        Return the string representation of the television's status: Power, Channel and Volume
+        Returns a string representation of the television's current state.
+
+        Returns:
+            str: A formatted string displaying the power status, current channel,
+            and current volume (shown as 0 if muted).
         """
         return f"Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume if not self.__muted else 0}"
